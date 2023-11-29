@@ -1,0 +1,13 @@
+<p style="color: green"><%= notice %></p>
+<% if user_signed_in? %> 
+  <div> <h1> Welcome, <%= current_user.email.match(/(^[^0-9@]+)/).to_s.capitalize %></h1> </div> 
+  <%= button_to "Sign out", destroy_user_session_path, method: :delete %>
+  <div>
+    <h3> or Select events: </h3>
+    <span><%= button_to 'Event A', events_path, params: {event: {event_type: 'A'}}, method: :post %>
+          <%= button_to 'Event B', events_path, params: {event: {event_type: 'B'}}, method: :post %>
+    </span>
+  </div>
+<% else %>
+  <%= button_to "Sign in", new_user_session_path %> 
+<% end %>
